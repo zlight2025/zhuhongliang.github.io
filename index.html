@@ -19,7 +19,7 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--gray-50);color:var(-
 .claude-badge a:hover{text-decoration:underline}
 .hero{background:var(--white);border-bottom:1px solid var(--gray-200);padding:60px 0 52px;position:relative;overflow:hidden}
 .hero-grid{position:absolute;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(37,99,235,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,.045) 1px,transparent 1px);background-size:40px 40px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 40%,transparent 100%);-webkit-mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 40%,transparent 100%)}
-#particle-canvas{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.6}
+#particle-canvas{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;opacity:.6}
 .scan-beam{position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent 0%,rgba(37,99,235,.18) 20%,rgba(37,99,235,.55) 50%,rgba(37,99,235,.18) 80%,transparent 100%);z-index:2;pointer-events:none;top:-4px;animation:scanDown 1.1s cubic-bezier(.4,0,.6,1) .3s forwards;opacity:0}
 @keyframes scanDown{0%{top:-4px;opacity:1}100%{top:100%;opacity:0}}
 .hero::before{content:'';position:absolute;top:-140px;right:-100px;width:520px;height:520px;background:radial-gradient(circle,#DBEAFE 0%,transparent 68%);pointer-events:none;z-index:1}
@@ -44,11 +44,6 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--gray-50);color:var(-
 .contact-item:hover .contact-icon svg{stroke:var(--blue)}
 .section-nav{background:var(--white);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:200;transition:box-shadow .3s}
 .section-nav.scrolled{box-shadow:0 4px 20px rgba(37,99,235,.08)}
-/* F. BACK TO TOP */
-#back-to-top{position:fixed;bottom:32px;right:32px;width:40px;height:40px;background:var(--blue);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;border:none;box-shadow:0 4px 14px rgba(37,99,235,.35);opacity:0;transform:translateY(12px);transition:opacity .3s,transform .3s,box-shadow .2s;z-index:500;pointer-events:none}
-#back-to-top.visible{opacity:1;transform:translateY(0);pointer-events:auto}
-#back-to-top:hover{box-shadow:0 6px 20px rgba(37,99,235,.5);transform:translateY(-2px)}
-#back-to-top svg{width:16px;height:16px;stroke:white;stroke-width:2.2;fill:none}
 .nav-inner{max-width:900px;margin:0 auto;padding:0 32px;display:flex}
 .nav-item{padding:14px 22px;font-size:12px;font-weight:500;color:var(--gray-400);text-decoration:none;letter-spacing:.05em;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;white-space:nowrap}
 .nav-item:hover{color:var(--blue);border-bottom-color:var(--blue-mid)}
@@ -57,6 +52,7 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--gray-50);color:var(-
 .content-grid{display:grid;grid-template-columns:255px 1fr;gap:36px;align-items:start}
 .sidebar{display:flex;flex-direction:column;gap:24px;position:sticky;top:52px}
 .sidebar-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:22px}
+.sidebar-card[id],.main-content[id],.edu-section[id]{scroll-margin-top:62px}
 .section-label{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:14px}
 .bio-text{font-size:12.5px;color:var(--gray-600);line-height:1.8}
 .bio-list{list-style:none;margin-top:10px;display:flex;flex-direction:column;gap:7px}
@@ -98,7 +94,7 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--gray-50);color:var(-
 .collapsible{overflow:hidden;max-height:0;opacity:0;transition:max-height .4s ease,opacity .35s ease}
 .collapsible.open{max-height:1600px;opacity:1}
 .projects{display:flex;flex-direction:column;gap:10px;margin-top:14px}
-.project-item{background:var(--gray-50);border-radius:10px;padding:14px 16px;border:1px solid var(--gray-200);transition:border-color .2s,background .2s;opacity:0;transform:translateY(14px)}
+.project-item{background:var(--gray-50);border-radius:10px;padding:14px 16px;border:1px solid var(--gray-200);opacity:0;transform:translateY(14px)}
 .project-item.proj-visible{transition:border-color .2s,background .2s,opacity .38s cubic-bezier(.22,1,.36,1),transform .38s cubic-bezier(.22,1,.36,1);opacity:1;transform:translateY(0)}
 .project-item:hover{background:var(--blue-light);border-color:var(--blue-mid)}
 .project-name{font-size:12.5px;font-weight:600;color:var(--gray-800);margin-bottom:5px}
@@ -112,6 +108,10 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--gray-50);color:var(-
 .edu-school{font-size:14px;font-weight:600;color:var(--gray-900)}
 .edu-meta{font-size:12.5px;color:var(--gray-600);margin-top:3px}
 .edu-year{font-family:'DM Mono',monospace;font-size:11px;color:var(--gray-400);margin-top:4px}
+#back-to-top{position:fixed;bottom:32px;right:32px;width:40px;height:40px;background:var(--blue);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;border:none;box-shadow:0 4px 14px rgba(37,99,235,.35);opacity:0;transform:translateY(12px);transition:opacity .3s,transform .3s,box-shadow .2s;z-index:500;pointer-events:none}
+#back-to-top.visible{opacity:1;transform:translateY(0);pointer-events:auto}
+#back-to-top:hover{box-shadow:0 6px 20px rgba(37,99,235,.5);transform:translateY(-2px)}
+#back-to-top svg{width:16px;height:16px;stroke:white;stroke-width:2.2;fill:none}
 .footer{text-align:center;padding:22px 32px;font-size:11px;color:var(--gray-400);border-top:1px solid var(--gray-200);letter-spacing:.03em}
 @media(max-width:740px){
   .hero-inner{grid-template-columns:1fr;gap:24px}
@@ -238,7 +238,7 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--gray-50);color:var(-
 
           <div class="exp-card reveal">
             <div class="exp-header">
-              <div><div class="exp-company">线下休娱商家 · 投后营销顾问</div><div class="exp-role">营销顾问（兼职）</div></div>
+              <div><div class="exp-company">线下休娱商家</div><div class="exp-role">投后营销顾问（兼职）</div></div>
               <div class="exp-period">2025.03 — 2025.10</div>
             </div>
             <p class="exp-desc">服务于一家小型投资机构，面向业态包含飞行影院和 VR 大空间的线下休闲玩乐商家，主导短视频平台、OTC 平台的营销推广获客策略制定优化及社群营销策略制定。</p>
@@ -362,9 +362,7 @@ const btt = document.getElementById('back-to-top');
 window.addEventListener('scroll', () => {
   const total = document.documentElement.scrollHeight - window.innerHeight;
   bar.style.width = (window.scrollY / total * 100) + '%';
-  // D. nav shadow
   nav.classList.toggle('scrolled', window.scrollY > 80);
-  // F. back to top
   btt.classList.toggle('visible', window.scrollY > 400);
 }, { passive: true });
 
@@ -386,69 +384,49 @@ window.addEventListener('scroll', () => {
   }, 600);
 })();
 
-/* 2. PARTICLE NETWORK (hero only) */
+/* 2. PARTICLE NETWORK */
 (function() {
   const canvas = document.getElementById('particle-canvas');
   const ctx = canvas.getContext('2d');
   const hero = document.querySelector('.hero');
   let W, H, particles, mouse = { x: -999, y: -999 };
   const COUNT = 55, LINK_DIST = 110, COLOR = '37,99,235';
-
-  function resize() {
-    W = canvas.width = hero.offsetWidth;
-    H = canvas.height = hero.offsetHeight;
-  }
-
+  function resize() { W = canvas.width = hero.offsetWidth; H = canvas.height = hero.offsetHeight; }
   function mkParticle() {
-    return {
-      x: Math.random() * W, y: Math.random() * H,
-      vx: (Math.random() - .5) * .4, vy: (Math.random() - .5) * .4,
-      r: Math.random() * 1.8 + 1
-    };
+    return { x: Math.random()*W, y: Math.random()*H, vx: (Math.random()-.5)*.4, vy: (Math.random()-.5)*.4, r: Math.random()*1.8+1 };
   }
-
-  function init() { resize(); particles = Array.from({ length: COUNT }, mkParticle); }
-
+  function init() { resize(); particles = Array.from({length:COUNT}, mkParticle); }
   function draw() {
-    ctx.clearRect(0, 0, W, H);
+    ctx.clearRect(0,0,W,H);
     particles.forEach(p => {
-      p.x += p.vx; p.y += p.vy;
-      if (p.x < 0 || p.x > W) p.vx *= -1;
-      if (p.y < 0 || p.y > H) p.vy *= -1;
-      const dx = p.x - mouse.x, dy = p.y - mouse.y;
-      const d = Math.sqrt(dx*dx + dy*dy);
-      if (d < 80) { p.x += dx/d * 1.2; p.y += dy/d * 1.2; }
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<0||p.x>W) p.vx*=-1;
+      if(p.y<0||p.y>H) p.vy*=-1;
+      const dx=p.x-mouse.x, dy=p.y-mouse.y, d=Math.sqrt(dx*dx+dy*dy);
+      if(d<80){p.x+=dx/d*1.2; p.y+=dy/d*1.2;}
     });
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i+1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const d = Math.sqrt(dx*dx + dy*dy);
-        if (d < LINK_DIST) {
+    for(let i=0;i<particles.length;i++) {
+      for(let j=i+1;j<particles.length;j++) {
+        const dx=particles[i].x-particles[j].x, dy=particles[i].y-particles[j].y;
+        const d=Math.sqrt(dx*dx+dy*dy);
+        if(d<LINK_DIST){
           ctx.beginPath();
-          ctx.strokeStyle = `rgba(${COLOR},${(1 - d/LINK_DIST) * 0.18})`;
-          ctx.lineWidth = .8;
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle=`rgba(${COLOR},${(1-d/LINK_DIST)*0.18})`;
+          ctx.lineWidth=.8;
+          ctx.moveTo(particles[i].x,particles[i].y);
+          ctx.lineTo(particles[j].x,particles[j].y);
           ctx.stroke();
         }
       }
     }
     particles.forEach(p => {
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-      ctx.fillStyle = `rgba(${COLOR},0.28)`;
-      ctx.fill();
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(${COLOR},0.28)`; ctx.fill();
     });
     requestAnimationFrame(draw);
   }
-
-  hero.addEventListener('mousemove', e => {
-    const rect = hero.getBoundingClientRect();
-    mouse.x = e.clientX - rect.left;
-    mouse.y = e.clientY - rect.top;
-  });
-  hero.addEventListener('mouseleave', () => { mouse.x = -999; mouse.y = -999; });
+  hero.addEventListener('mousemove', e => { const r=hero.getBoundingClientRect(); mouse.x=e.clientX-r.left; mouse.y=e.clientY-r.top; });
+  hero.addEventListener('mouseleave', () => { mouse.x=-999; mouse.y=-999; });
   window.addEventListener('resize', resize);
   init(); draw();
 })();
@@ -456,7 +434,7 @@ window.addEventListener('scroll', () => {
 /* COUNTER */
 function animateCounter(el) {
   const target = parseInt(el.dataset.target);
-  const inc = target / (1100 / 16);
+  const inc = target / (1100/16);
   let cur = 0;
   const t = setInterval(() => {
     cur += inc;
@@ -500,10 +478,9 @@ function toggleCard(btn) {
   col.classList.toggle('open');
   icon.classList.toggle('open');
   btn.childNodes[0].textContent = open ? '查看项目案例' : '收起项目案例';
-  // B. stagger items on open
   if (!open) {
     const items = col.querySelectorAll('.project-item');
-    items.forEach(item => { item.classList.remove('proj-visible'); });
+    items.forEach(item => item.classList.remove('proj-visible'));
     items.forEach((item, i) => {
       setTimeout(() => item.classList.add('proj-visible'), 80 + i * 110);
     });
