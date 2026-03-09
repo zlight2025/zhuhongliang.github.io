@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>朱洪亮 · 品牌营销</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Noto+Sans+SC:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#2563EB;--blue-light:#EFF4FF;--blue-mid:#DBEAFE;--gray-50:#F8FAFC;--gray-100:#F1F5F9;--gray-200:#E2E8F0;--gray-400:#94A3B8;--gray-600:#475569;--gray-800:#1E293B;--gray-900:#0F172A;--white:#FFFFFF;--radius-lg:18px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans SC',sans-serif;background:var(--gray-50);color:var(--gray-800);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+#progress-bar{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--blue),#60A5FA);z-index:9999;transition:width 0.08s linear;border-radius:0 2px 2px 0;box-shadow:0 0 8px rgba(37,99,235,.4)}
+.claude-badge{background:var(--white);border-bottom:1px solid var(--gray-200);padding:8px 32px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:11.5px;color:var(--gray-400);letter-spacing:.02em}
+.claude-dot{width:6px;height:6px;background:var(--blue);border-radius:50%;animation:blink 2.2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.75)}}
+.claude-badge a{color:var(--blue);text-decoration:none;font-weight:500}
+.claude-badge a:hover{text-decoration:underline}
+.hero{background:var(--white);border-bottom:1px solid var(--gray-200);padding:60px 0 52px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-140px;right:-100px;width:520px;height:520px;background:radial-gradient(circle,#DBEAFE 0%,transparent 68%);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:-80px;left:8%;width:340px;height:340px;background:radial-gradient(circle,#EFF4FF 0%,transparent 70%);pointer-events:none}
+.container{max-width:900px;margin:0 auto;padding:0 32px}
+.hero-tag,.hero h1,.hero-tagline,.hero-contacts{opacity:0;transform:translateY(24px);animation:heroUp .65s cubic-bezier(.22,1,.36,1) forwards}
+.hero-tag{animation-delay:.06s}.hero h1{animation-delay:.18s}.hero-tagline{animation-delay:.30s}.hero-contacts{animation-delay:.44s}
+@keyframes heroUp{to{opacity:1;transform:translateY(0)}}
+.hero-inner{display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center;position:relative;z-index:1}
+.hero-tag{display:inline-flex;align-items:center;gap:7px;background:var(--blue-light);color:var(--blue);font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:5px 13px;border-radius:100px;margin-bottom:18px}
+.hero-tag::before{content:'';width:6px;height:6px;background:var(--blue);border-radius:50%}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(44px,6.5vw,62px);color:var(--gray-900);line-height:1.0;letter-spacing:-.025em;margin-bottom:16px}
+.hero-tagline{font-size:14.5px;color:var(--gray-600);font-weight:300;max-width:480px;line-height:1.78}
+.hero-contacts{display:flex;flex-direction:column;gap:10px;align-items:flex-start;flex-shrink:0}
+.contact-item{display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--gray-600);text-decoration:none;transition:color .2s;width:100%}
+.contact-item:hover{color:var(--blue)}
+.contact-icon{width:32px;height:32px;background:var(--gray-100);border-radius:9px;display:flex;align-items:center;justify-content:center;transition:background .2s;flex-shrink:0}
+.contact-item:hover .contact-icon{background:var(--blue-mid)}
+.contact-icon svg{width:14px;height:14px;stroke:var(--gray-400);transition:stroke .2s}
+.contact-item:hover .contact-icon svg{stroke:var(--blue)}
+.section-nav{background:var(--white);border-bottom:1px solid var(--gray-200);position:sticky;top:0;z-index:200}
+.nav-inner{max-width:900px;margin:0 auto;padding:0 32px;display:flex}
+.nav-item{padding:14px 22px;font-size:12px;font-weight:500;color:var(--gray-400);text-decoration:none;letter-spacing:.05em;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;white-space:nowrap}
+.nav-item:hover{color:var(--blue);border-bottom-color:var(--blue-mid)}
+.nav-item.active{color:var(--blue);border-bottom-color:var(--blue)}
+.main{padding:48px 0 80px}
+.content-grid{display:grid;grid-template-columns:255px 1fr;gap:36px;align-items:start}
+.sidebar{display:flex;flex-direction:column;gap:24px;position:sticky;top:52px}
+.sidebar-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:22px}
+.section-label{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:14px}
+.bio-text{font-size:12.5px;color:var(--gray-600);line-height:1.8}
+.bio-list{list-style:none;margin-top:10px;display:flex;flex-direction:column;gap:7px}
+.bio-list li{font-size:12px;color:var(--gray-600);line-height:1.7;padding-left:14px;position:relative}
+.bio-list li::before{content:'';position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--blue);opacity:.5}
+.stat-row{display:flex;gap:7px;margin-top:16px}
+.stat{flex:1;background:var(--gray-50);border-radius:10px;padding:10px 6px;text-align:center;border:1px solid var(--gray-200)}
+.stat-num{font-family:'DM Serif Display',serif;font-size:24px;color:var(--blue);line-height:1;display:block}
+.stat-desc{font-size:9.5px;color:var(--gray-400);margin-top:4px;line-height:1.4}
+.skill-group{margin-bottom:14px}
+.skill-group:last-child{margin-bottom:0}
+.skill-group-label{font-size:10.5px;color:var(--gray-400);font-weight:500;margin-bottom:7px}
+.skill-tags{display:flex;flex-wrap:wrap;gap:5px}
+.skill-tag{font-size:11px;padding:4px 10px;border-radius:6px;background:var(--gray-100);color:var(--gray-600);border:1px solid transparent;cursor:default;transition:background .18s,color .18s,border-color .18s,transform .18s,box-shadow .18s}
+.skill-tag:hover{background:var(--blue-light);color:var(--blue);border-color:var(--blue-mid);transform:scale(1.08);box-shadow:0 0 10px rgba(37,99,235,.18)}
+.skill-tag.highlight{background:var(--blue-light);color:var(--blue);font-weight:500}
+.skill-tag.highlight:hover{background:var(--blue);color:var(--white);border-color:var(--blue);box-shadow:0 0 14px rgba(37,99,235,.32)}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .55s cubic-bezier(.22,1,.36,1),transform .55s cubic-bezier(.22,1,.36,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.main-content{display:flex;flex-direction:column;gap:16px}
+.exp-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:28px 30px;position:relative;overflow:hidden;transition:box-shadow .25s,border-color .25s,transform .25s}
+.exp-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--blue);opacity:0;transition:opacity .25s;border-radius:0 2px 2px 0}
+.exp-card:hover{box-shadow:0 8px 32px rgba(37,99,235,.09);border-color:var(--blue-mid);transform:translateY(-2px)}
+.exp-card:hover::before{opacity:1}
+.exp-header{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:6px}
+.exp-company{font-size:15.5px;font-weight:600;color:var(--gray-900);line-height:1.3}
+.exp-period{font-family:'DM Mono',monospace;font-size:11px;color:var(--gray-400);background:var(--gray-100);padding:3px 10px;border-radius:100px;flex-shrink:0;white-space:nowrap;margin-top:3px}
+.exp-role{font-size:12px;color:var(--blue);font-weight:500;margin-bottom:12px;letter-spacing:.02em}
+.exp-desc{font-size:12.5px;color:var(--gray-600);line-height:1.8;margin-bottom:10px}
+.exp-segments{display:flex;flex-direction:column;gap:9px;margin-bottom:12px}
+.exp-segment{font-size:12.5px;color:var(--gray-600);line-height:1.78}
+.seg-title{font-weight:600;color:var(--blue);background:var(--blue-light);padding:1px 8px;border-radius:4px;font-size:11.5px;letter-spacing:.02em;display:inline-block;margin-right:6px;margin-bottom:2px}
+.metrics{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.metric{font-size:11px;font-weight:600;color:var(--blue);background:var(--blue-light);padding:3px 10px;border-radius:100px}
+.toggle-btn{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--blue);cursor:pointer;background:none;border:none;padding:0;margin-top:12px;font-family:'Noto Sans SC',sans-serif;font-weight:500;transition:opacity .2s}
+.toggle-btn:hover{opacity:.7}
+.toggle-icon{width:15px;height:15px;transition:transform .25s;stroke:var(--blue)}
+.toggle-icon.open{transform:rotate(180deg)}
+.collapsible{overflow:hidden;max-height:0;opacity:0;transition:max-height .4s ease,opacity .35s ease}
+.collapsible.open{max-height:1600px;opacity:1}
+.projects{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+.project-item{background:var(--gray-50);border-radius:10px;padding:14px 16px;border:1px solid var(--gray-200);transition:border-color .2s,background .2s}
+.project-item:hover{background:var(--blue-light);border-color:var(--blue-mid)}
+.project-name{font-size:12.5px;font-weight:600;color:var(--gray-800);margin-bottom:5px}
+.project-desc{font-size:12px;color:var(--gray-600);line-height:1.75}
+.edu-section{margin-top:40px;padding-top:36px;border-top:1px solid var(--gray-200)}
+.edu-section-label{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:16px}
+.edu-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:22px 26px;display:flex;align-items:center;gap:20px;transition:box-shadow .2s,border-color .2s}
+.edu-card:hover{box-shadow:0 4px 20px rgba(37,99,235,.07);border-color:var(--blue-mid)}
+.edu-icon{width:44px;height:44px;background:var(--blue-light);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.edu-icon svg{width:22px;height:22px;stroke:var(--blue)}
+.edu-school{font-size:14px;font-weight:600;color:var(--gray-900)}
+.edu-meta{font-size:12.5px;color:var(--gray-600);margin-top:3px}
+.edu-year{font-family:'DM Mono',monospace;font-size:11px;color:var(--gray-400);margin-top:4px}
+.footer{text-align:center;padding:22px 32px;font-size:11px;color:var(--gray-400);border-top:1px solid var(--gray-200);letter-spacing:.03em}
+@media(max-width:740px){
+  .hero-inner{grid-template-columns:1fr;gap:24px}
+  .hero-contacts{align-items:flex-start;flex-direction:row;flex-wrap:wrap}
+  .content-grid{grid-template-columns:1fr}
+  .sidebar{position:static}
+  .section-nav{overflow-x:auto}
+}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<div class="claude-badge">
+  <div class="claude-dot"></div>
+  本简历网页由 <a href="https://claude.ai" target="_blank">Claude（Anthropic）</a>&nbsp;辅助设计与制作
+</div>
+
+<section class="hero" id="top">
+  <div class="container">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-tag">品牌营销 · Brand Marketing</div>
+        <h1>朱洪亮</h1>
+        <p class="hero-tagline">13 年品牌营销从业经历，深耕互联网生服、科技消费品行业，擅长整合营销、品牌策略与场景化传播，用数据驱动品牌增长。</p>
+      </div>
+      <div class="hero-contacts">
+        <a class="contact-item" href="tel:18612276353">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/>
+            </svg>
+          </div>
+          186 1227 6353
+        </a>
+        <a class="contact-item" href="mailto:zlight2022@qq.com">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </div>
+          zlight2022@qq.com
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<nav class="section-nav">
+  <div class="nav-inner">
+    <a class="nav-item active" href="#about">关于我</a>
+    <a class="nav-item" href="#skills">技能</a>
+    <a class="nav-item" href="#experience">工作 &amp; 项目</a>
+    <a class="nav-item" href="#education">教育背景</a>
+  </div>
+</nav>
+
+<main class="main">
+  <div class="container">
+    <div class="content-grid">
+
+      <aside class="sidebar">
+
+        <div class="sidebar-card reveal" id="about">
+          <div class="section-label">关于我</div>
+          <p class="bio-text">13 年品牌营销/整合营销从业经历，覆盖甲乙双方。</p>
+          <ul class="bio-list">
+            <li>7 年互联网大厂品牌营销项目 &amp; 小团队管理经验，6 年乙方数字营销项目管理经验</li>
+            <li>成熟的品牌营销传播方法论和行业资源，对互联网生活服务、科技消费品等行业有深度理解</li>
+            <li>具备全链路品牌操盘经验，涵盖品牌定位、整合营销、数字化营销、内容营销等</li>
+            <li>熟悉下沉市场与大众消费心智，具备技术转译、场景化传播的能力</li>
+          </ul>
+          <div class="stat-row">
+            <div class="stat"><span class="stat-num" data-target="13">0</span><div class="stat-desc">年从业<br>经验</div></div>
+            <div class="stat"><span class="stat-num" data-target="7">0</span><div class="stat-desc">年大厂<br>经验</div></div>
+            <div class="stat"><span class="stat-num" data-target="6">0</span><div class="stat-desc">年乙方<br>管理</div></div>
+          </div>
+        </div>
+
+        <div class="sidebar-card reveal" id="skills">
+          <div class="section-label">核心技能</div>
+          <div class="skill-group">
+            <div class="skill-group-label">品牌策略</div>
+            <div class="skill-tags">
+              <span class="skill-tag highlight">整合营销</span>
+              <span class="skill-tag highlight">品牌定位</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-group-label">数字营销</div>
+            <div class="skill-tags">
+              <span class="skill-tag highlight">内容营销</span>
+              <span class="skill-tag highlight">社交营销</span>
+              <span class="skill-tag">社群营销</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-group-label">营销方法论</div>
+            <div class="skill-tags">
+              <span class="skill-tag">STP 理论</span>
+              <span class="skill-tag">AARRR 模型</span>
+              <span class="skill-tag">Aaker 模型</span>
+              <span class="skill-tag">场景化传播</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-group-label">行业经验</div>
+            <div class="skill-tags">
+              <span class="skill-tag highlight">互联网生活服务</span>
+              <span class="skill-tag">科技消费品</span>
+              <span class="skill-tag">下沉市场</span>
+            </div>
+          </div>
+        </div>
+
+      </aside>
+
+      <section>
+        <div class="main-content" id="experience">
+
+          <!-- 线下休娱 -->
+          <div class="exp-card reveal">
+            <div class="exp-header">
+              <div>
+                <div class="exp-company">线下休娱商家 · 投后营销顾问</div>
+                <div class="exp-role">营销顾问（兼职）</div>
+              </div>
+              <div class="exp-period">2025.03 — 2025.10</div>
+            </div>
+            <p class="exp-desc">服务于一家小型投资机构，面向业态包含飞行影院和 VR 大空间的线下休闲玩乐商家，主导短视频平台、OTC 平台的营销推广获客策略制定优化及社群营销策略制定。</p>
+            <div class="metrics">
+              <span class="metric">▲ 5个月 GMV 增长 8%</span>
+            </div>
+          </div>
+
+          <!-- 美团 -->
+          <div class="exp-card reveal">
+            <div class="exp-header">
+              <div>
+                <div class="exp-company">美团</div>
+                <div class="exp-role">平台市场营销部 · 品牌营销</div>
+              </div>
+              <div class="exp-period">2021.11 — 2024.12</div>
+            </div>
+            <div class="exp-segments">
+              <div class="exp-segment">
+                <span class="seg-title">整合营销</span>
+                围绕团购业务重点活动节点制定年度营销日历，通过品牌 TVC、IP 跨界联名、内容种草、营销事件、传统媒介投放等方式打造品效兼顾的营销战役，提升品牌美誉度并为站内活动引流。
+              </div>
+              <div class="exp-segment">
+                <span class="seg-title">品牌策略</span>
+                结合 STP 理论、AARRR 海盗模型、Aaker 模型等为生活服务业务制定品牌定位策略，辅助完成自营业务的品牌定位落地。
+              </div>
+              <div class="exp-segment">
+                <span class="seg-title">品牌营销城市战役</span>
+                在品牌下沉市场攻防战行业大背景下，结合业务特性圈定目标城市，通过线下媒介、落地活动等方式 by 月策划执行城市营销战役，争夺区域市场 M 值。
+              </div>
+            </div>
+            <button class="toggle-btn" onclick="toggleCard(this)">
+              查看项目案例
+              <svg class="toggle-icon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="collapsible">
+              <div class="projects">
+                <div class="project-item">
+                  <div class="project-name">美团团购·丽人「爱美季」整合营销</div>
+                  <div class="project-desc">暑期面向下沉年轻化人群策划爱美季优惠活动，以「精准供给+场景化内容」突破同质化促销。锁定三大高潜细分品类配合「整体5折」钩子组合，小红书内容种草+线下商圈创意媒介联动，实现需求—内容—触点—转化完整闭环。</div>
+                  <div class="metrics">
+                    <span class="metric">▲ 活动页 UV 提升数万</span>
+                    <span class="metric">▲ GTV 增长数十万</span>
+                  </div>
+                </div>
+                <div class="project-item">
+                  <div class="project-name">美团团购下沉城市营销战役</div>
+                  <div class="project-desc">在品牌与抖音下沉城市攻防战背景下，以城市消费力、竞争格局、渗透率多维圈选目标城市，为每城定制「线下媒介+商户联动+事件活动」最小可行营销模型，快速测试迭代形成标准化执行手册，实现规模化复制。</div>
+                  <div class="metrics">
+                    <span class="metric">▲ 各城市平均 M 值提升约 0.5</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 58集团 -->
+          <div class="exp-card reveal">
+            <div class="exp-header">
+              <div>
+                <div class="exp-company">58 集团</div>
+                <div class="exp-role">品牌公关部 · 社交营销经理</div>
+              </div>
+              <div class="exp-period">2018.05 — 2021.10</div>
+            </div>
+            <p class="exp-desc">带领 3–5 人团队，统筹 58 同城大品牌、58 同城招聘等 5 项业务的整合营销/社交营销工作，覆盖品牌曝光、运营引流、用户增长与订单增长全目标。同步推动团队从单一传播型升级为整合型营销团队，精细化提升全盘营销效率。</p>
+            <button class="toggle-btn" onclick="toggleCard(this)">
+              查看项目案例
+              <svg class="toggle-icon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="collapsible">
+              <div class="projects">
+                <div class="project-item">
+                  <div class="project-name">58 到家精选 · 直播带货品效方法论验证（2020—2021）</div>
+                  <div class="project-desc">品牌冷启动阶段策划「明星直播带货+长效品牌资产沉淀」双轮驱动模型，首场直播以「明星背书+专属爆款套餐」组合达成 GMV 30 万，同时将直播切片转化为品牌宣传素材在社交平台二次发酵，形成「带货即种草」的循环。此后迭代出 SOP 实现 ROI 1.3 的稳定产出，共执行直播带货 23 场。</div>
+                  <div class="metrics">
+                    <span class="metric">首场 GMV 30万</span>
+                    <span class="metric">ROI 1.3</span>
+                    <span class="metric">23场直播 近2万订单</span>
+                    <span class="metric">总曝光超8亿</span>
+                  </div>
+                </div>
+                <div class="project-item">
+                  <div class="project-name">58 到家精选 · 2021 春节大促整合营销</div>
+                  <div class="project-desc">在到家服务行业高峰节点春节期间，以竞品差异化认知为目的，通过「情感共鸣+资源爆破」核心策略在极短时间内穿透传播噪音。13 天超短周期策划并执行新春大扫除整合营销项目，联动艺人宋丹丹短代资源，在微博、抖音策划话题内容传播，精准激活春节家庭消费场景心智。</div>
+                  <div class="metrics">
+                    <span class="metric">总曝光 8.9亿</span>
+                    <span class="metric">▲ 订单超预期 10%</span>
+                  </div>
+                </div>
+                <div class="project-item">
+                  <div class="project-name">58 同城招聘 · 超职季 IP 整合营销（2021.07）</div>
+                  <div class="project-desc">在用户年轻化策略前提下，联动《时尚先生》、艺人陈伟霆、落地活动策划方等多方团队策划执行「潮改工装计划」大型传播项目，有效利用明星粉丝形成大量自传播，跨界时尚提升品牌调性。</div>
+                  <div class="metrics">
+                    <span class="metric">总曝光约 10亿</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 三星鹏泰 -->
+          <div class="exp-card reveal">
+            <div class="exp-header">
+              <div>
+                <div class="exp-company">三星鹏泰</div>
+                <div class="exp-role">新媒体营销</div>
+              </div>
+              <div class="exp-period">2015.09 — 2018.05</div>
+            </div>
+            <p class="exp-desc">负责三星手机新媒体营销及旗舰产品社交营销项目，建立三星 S6–S8 系列新品上市 SNS 平台内容营销 SOP，通过创意内容与热点话题影响用户心智，促进产品销售。</p>
+          </div>
+
+          <!-- 饭团互动 -->
+          <div class="exp-card reveal">
+            <div class="exp-header">
+              <div>
+                <div class="exp-company">饭团互动</div>
+                <div class="exp-role">营销策划</div>
+              </div>
+              <div class="exp-period">2014.03 — 2015.03</div>
+            </div>
+            <p class="exp-desc">为互联网、科技数码、电竞等多家品牌策划社会化营销项目，服务百度、去哪儿网、WCA 电子竞技大赛等品牌客户。</p>
+          </div>
+
+          <!-- 博圣云峰 -->
+          <div class="exp-card reveal">
+            <div class="exp-header">
+              <div>
+                <div class="exp-company">博圣云峰 / 北京御崇文化</div>
+                <div class="exp-role">新媒体运营</div>
+              </div>
+              <div class="exp-period">2012.07 — 2014.01</div>
+            </div>
+            <p class="exp-desc">负责 @百度 官方微博日常内容运营及微博活动策划执行；负责三星应用商城 @三星乐园 的微博内容运营与活动策划，积累品牌官方账号精细化运营基础能力。</p>
+          </div>
+
+        </div>
+
+        <!-- 教育背景 -->
+        <div class="edu-section reveal" id="education">
+          <div class="edu-section-label">教育背景</div>
+          <div class="edu-card">
+            <div class="edu-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+              </svg>
+            </div>
+            <div>
+              <div class="edu-school">大连理工大学城市学院</div>
+              <div class="edu-meta">信息管理与信息系统 · 本科（学士）</div>
+              <div class="edu-year">2008 — 2012</div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">朱洪亮 · 品牌营销 · 2026 &nbsp;·&nbsp; Powered by Claude</footer>
+
+<script>
+const bar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const total = document.documentElement.scrollHeight - window.innerHeight;
+  bar.style.width = (window.scrollY / total * 100) + '%';
+}, { passive: true });
+
+function animateCounter(el) {
+  const target = parseInt(el.dataset.target);
+  const inc = target / (1100 / 16);
+  let cur = 0;
+  const t = setInterval(() => {
+    cur += inc;
+    if (cur >= target) { cur = target; clearInterval(t); }
+    el.textContent = Math.floor(cur);
+  }, 16);
+}
+
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      e.target.querySelectorAll('.stat-num[data-target]').forEach(animateCounter);
+      revealObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+const navObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+      const link = document.querySelector('.nav-item[href="#' + e.target.id + '"]');
+      if (link) link.classList.add('active');
+    }
+  });
+}, { rootMargin: '-25% 0px -65% 0px' });
+['about','skills','experience','education'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) navObs.observe(el);
+});
+
+function toggleCard(btn) {
+  const col = btn.nextElementSibling;
+  const icon = btn.querySelector('.toggle-icon');
+  const open = col.classList.contains('open');
+  col.classList.toggle('open');
+  icon.classList.toggle('open');
+  btn.childNodes[0].textContent = open ? '查看项目案例' : '收起项目案例';
+}
+</script>
+</body>
+</html>
